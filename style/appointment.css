@@ -1,0 +1,329 @@
+.steps {
+	counter-reset: steps 0;
+	
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: nowrap;
+	gap: 2rem;
+
+	padding: 0 1rem;
+
+	overflow-x: auto;
+}
+.steps li {
+	counter-increment: steps 1;
+	text-align: center;
+	white-space: nowrap;
+}
+.steps li::marker {
+	content: none;
+}
+.steps li::before {
+	content: counter(steps);
+	display: block;
+
+	margin: 0.5rem auto;
+	font-size: 1.5rem;
+
+	width: 2em;
+	aspect-ratio: 1/1;
+	
+	border-radius: 50%;
+	background: #e4e4e4;
+	color: #000;
+
+	display: grid;
+	place-content: center;
+
+	font-weight: bold;
+}
+.steps li[aria-current="true"]::before {
+	background: #D0E7FF;
+}
+
+fieldset {
+	border: none;
+}
+
+main label,
+main input,
+main select,
+main textarea {
+	display: block;
+	width: 100%;
+	margin: 0.25rem 0;
+}
+
+main select,
+main input,
+main textarea {
+	margin: 0.5rem 0;
+}
+
+label[for="date"] {
+	width: fit-content;
+}
+label[for="symptom"] {
+	grid-column: span 2;
+	max-width: 40rem;
+	margin: auto;
+}
+
+legend,
+input[type="radio"] {
+	position: absolute;
+	top: -2000px;
+	opacity: 0;
+}
+
+input[type="radio"] ~ label {
+	padding: 0.5rem;
+	border-radius: 0.5rem;
+	text-align: center;
+
+	background: #e4e4e4;
+	color: #000;
+
+	user-select: none;
+}
+input[type="radio"]:checked ~ label {
+	background: #D0E7FF;
+}
+
+main menu {
+	display: flex;
+	justify-content: space-between;
+	list-style: none;
+	gap: 1rem;
+
+	padding: 0;
+}
+main menu li {
+	flex: 1;
+}
+
+#date {
+	width: 16rem;
+}
+
+#date-err-msg {
+	color: red;
+}
+
+#next-btn {
+	margin-left: auto;
+}
+
+#time-selector {
+	max-width: 26rem;
+	margin: 3rem auto;
+
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+	gap: 1rem;
+}
+#time-selector div {
+	position: relative;
+}
+#time-selector input {
+	position: absolute;
+	inset: 0;
+}
+
+#appointment-form {
+	display: grid;
+	grid-template-areas: "foo";
+	overflow: hidden;
+
+	padding: 1rem 0;
+}
+#appointment-form > * {
+	grid-area: foo;
+
+	background: #ffffff;
+	transition: transform 0.2s, opacity 0.2s;
+}
+
+.detail-card {
+	max-width: 60rem;
+	margin: auto;
+
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 0.5rem 1rem;
+}
+
+.appointment {
+	max-width: 40rem;
+
+	margin: 1rem auto;
+	padding: 1.5rem;
+	
+	border: 1px solid black;
+	box-shadow: 0 0 32px rgba(0, 0, 0, 0.075);
+	border-radius: 10px;
+}
+.appointment time {
+	font-size: 1.125em;
+	color: #043133;
+	border-bottom: 1px dotted #4D5959;
+	padding-bottom: 4px;
+}
+.steps {
+	counter-reset: steps 0;
+	
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: nowrap;
+	gap: 2rem;
+
+	padding: 0 1rem;
+
+	overflow-x: auto;
+}
+.steps li {
+	counter-increment: steps 1;
+	text-align: center;
+	white-space: nowrap;
+}
+.steps li::marker {
+	content: none;
+}
+.steps li::before {
+	content: counter(steps);
+	display: block;
+
+	margin: 0.5rem auto;
+	font-size: 1.5rem;
+
+	width: 2em;
+	aspect-ratio: 1/1;
+	
+	border-radius: 50%;
+	background: #e4e4e4;
+	color: #000;
+
+	display: grid;
+	place-content: center;
+
+	font-weight: bold;
+}
+.steps li[aria-current="true"]::before {
+	background: #D0E7FF;
+}
+
+fieldset {
+	border: none;
+}
+
+main label,
+main input,
+main select,
+main textarea {
+	display: block;
+	width: 100%;
+	margin: 0.25rem 0;
+}
+
+main select,
+main input,
+main textarea {
+	margin: 0.5rem 0;
+}
+
+label[for="date"] {
+	width: fit-content;
+}
+label[for="symptom"] {
+	grid-column: span 2;
+	max-width: 40rem;
+	margin: auto;
+}
+
+legend,
+input[type="radio"] {
+	position: absolute;
+	top: -2000px;
+	opacity: 0;
+}
+
+input[type="radio"] ~ label {
+	padding: 0.5rem;
+	border-radius: 0.5rem;
+	text-align: center;
+
+	background: #e4e4e4;
+	color: #000;
+
+	user-select: none;
+}
+input[type="radio"]:checked ~ label {
+	background: #D0E7FF;
+}
+
+main menu {
+	display: flex;
+	justify-content: space-between;
+	list-style: none;
+	gap: 1rem;
+
+	padding: 0;
+}
+main menu li {
+	flex: 1;
+}
+
+#date {
+	width: 16rem;
+}
+
+#date-err-msg {
+	color: red;
+}
+
+#next-btn {
+	margin-left: auto;
+}
+
+.detail-card {
+	max-width: 60rem;
+	margin: auto;
+
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 0.5rem 1rem;
+}
+
+.appointment {
+	max-width: 40rem;
+
+	margin: 1rem auto;
+	padding: 1.5rem;
+	
+	border: 1px solid black;
+	box-shadow: 0 0 32px rgba(0, 0, 0, 0.075);
+	border-radius: 10px;
+}
+.appointment time {
+	font-size: 1.125em;
+	color: #043133;
+	border-bottom: 1px dotted #4D5959;
+	padding-bottom: 4px;
+}
+
+@media (max-width: 480px) {
+	main label {
+		margin: 1.5rem 0;
+	}
+
+	.detail-card,
+	#time-selector {
+		display: block;
+	}
+}
+
+@media (min-width: 481px) {
+	#appointment-form > * {
+		padding: 1rem 1rem 3rem;
+	}
+}
