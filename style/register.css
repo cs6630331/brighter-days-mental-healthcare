@@ -1,0 +1,37 @@
+h1 {
+	text-align: center;
+}
+
+.register-card {
+	max-width: 60rem;
+	margin: auto;
+
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 1rem;
+}
+
+main label,
+main input,
+main select {
+	display: block;
+	width: 100%;
+}
+
+main select,
+main input {
+	margin: 0.5rem 0;
+}
+
+.separated {
+	grid-column: span 2;
+}
+
+@media (max-width: 480px) {
+	.register-card {
+		display: block;
+	}
+	label {
+		margin: 1.5rem 0;
+	}
+}
