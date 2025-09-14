@@ -1,0 +1,19 @@
+h1 {
+	text-align: center;
+}
+
+.login-card {
+	max-width: 24rem;
+	margin: auto;
+}
+
+main label,
+main input {
+	display: block;
+	width: 100%;
+	margin: 0.5rem 0;
+}
+
+main label {
+	margin: 1.5rem 0;
+}

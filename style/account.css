@@ -1,0 +1,114 @@
+main {
+	display: grid;
+	grid-template:
+		". 	 label" 3rem
+		"nav main " / auto 1fr;
+	gap: 2.5rem;
+}
+main > section {
+	grid-area: main;
+}
+main > aside {
+	grid-area: nav;
+}
+main > h1 {
+	margin: 0;
+	grid-area: label;
+}
+main label,
+main input,
+main select {
+	display: block;
+	width: 100%;
+}
+
+.account-details {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 0.5rem 1rem;
+}
+.account-details .separated {
+	grid-column: span 2;
+}
+
+.appointment {
+	padding: 1.5rem;
+	margin-bottom: 3rem;
+}
+.appointment time {
+	font-size: 1.125em;
+	color: #043133;
+	border-bottom: 1px dotted #4D5959;
+	padding-bottom: 4px;
+}
+
+.appointment,
+.account-nav {
+	border: 1px solid black;
+	box-shadow: 0 0 32px rgba(0, 0, 0, 0.075);
+	border-radius: 10px;
+}
+
+.account-nav {
+	padding: 1rem;
+	align-self: start;
+}
+.account-nav ul {
+	margin: 0;
+	padding: 0;
+}
+.account-nav a,
+.account-nav label {
+	display: block;
+	padding: 1rem;
+	color: #043133;
+	margin: 0;
+
+	padding-right: 6rem;
+}
+.account-nav label {
+	display: none;
+}
+.account-nav label:hover {
+	text-decoration: underline;
+}
+.account-nav input {
+	position: absolute;
+	top: -1000px;
+	left: 0;
+	opacity: 0;
+}
+.account-nav input:checked ~ label {
+	background: #043133;
+	color: #ffffff;
+}
+
+@media (max-width: 768px) {
+	main {
+		display: block;
+	}
+
+	main > * {
+		margin: 1.5rem 0;
+	}
+
+	.account-details button {
+		margin: auto;
+	}
+
+	.account-nav input:not(:checked) ~ nav {
+		display: none;
+	}
+	.account-nav label {
+		display: block;
+	}
+}
+
+@media (max-width: 480px) {
+	.account-details {
+		display: block;
+	}
+	label {
+		margin: 1.5rem 0;
+	}
+}
