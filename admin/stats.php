@@ -22,6 +22,7 @@
 					<?php endfor; ?>
 				</select>
 			</label>
+			<button type="submit" class="big">เลือก</button>
 		</form>
 		<div class="allow-overscroll">
 			<table class="stats">
