@@ -12,7 +12,7 @@
 	?>
 	<main>
 		<h1>สถิติ</h1>
-		<form action=".">
+		<form action="stats.php" id="doctor-filter">
 			<label for="doctor">
 				จิตแพทย์ที่ต้องการ
 				<select name="doctor" id="doctor">
