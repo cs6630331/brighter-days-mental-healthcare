@@ -1,18 +1,25 @@
 #search {
 	display: flex;
 	gap: 1rem;
-	margin: 1rem 0;
 }
 
 #search > * {
 	flex: 1;
 }
 
-#search input {
+form {
+	margin: 1rem 0;
+}
+
+main input,
+main select {
 	display: block;
 	width: 100%;
 }
 
+.stats td {
+	text-align: right;
+}
 
 .appointment {
 	padding: 1rem;
