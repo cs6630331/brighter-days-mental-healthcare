@@ -1,0 +1,31 @@
+#search {
+	display: flex;
+	gap: 1rem;
+	margin: 1rem 0;
+}
+
+#search > * {
+	flex: 1;
+}
+
+#search input {
+	display: block;
+	width: 100%;
+}
+
+
+.appointment {
+	padding: 1rem;
+}
+.appointment hgroup > * {
+	margin: 0.25rem 0;
+}
+.appointment > div {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	flex-wrap: wrap;
+	gap: 1rem 3rem;
+
+	margin: 1rem 0;
+}
