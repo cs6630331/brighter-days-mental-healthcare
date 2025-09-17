@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
 	<?php include "../components/head.php"; ?>
-	<title>Patients | Admin</title>
+	<title>Appointments | Admin</title>
 	<link rel="stylesheet" href="../style/admin.css">
 </head>
 <body>
