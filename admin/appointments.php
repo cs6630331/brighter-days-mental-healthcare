@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
 	<?php include "../components/head.php"; ?>
 	<title>Patients | Admin</title>
