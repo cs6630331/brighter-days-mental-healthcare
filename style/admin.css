@@ -1,0 +1,46 @@
+#search,
+#doctor-filter {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+}
+
+#search > *,
+#doctor-filter label {
+	flex: 1;
+	min-width: 24rem;
+}
+
+#doctor-filter {
+	align-items: flex-end;
+}
+
+form {
+	margin: 1rem 0;
+}
+
+main input,
+main select {
+	display: block;
+	width: 100%;
+}
+
+.stats td {
+	text-align: right;
+}
+
+.appointment {
+	padding: 1rem;
+}
+.appointment hgroup > * {
+	margin: 0.25rem 0;
+}
+.appointment > div {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	flex-wrap: wrap;
+	gap: 1rem 3rem;
+
+	margin: 1rem 0;
+}
