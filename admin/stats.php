@@ -23,24 +23,26 @@
 				</select>
 			</label>
 		</form>
-		<table class="stats">
-			<thead>
-				<tr>
-					<th>เดือน/ปี</th>
-					<th>จำนวนผู้ลงนัดหมาย</th>
-					<th>จำนวนวันที่นัดหมาย</th>
-				</tr>
-			</thead>
-			<tbody>
-				<?php for ($i = 0; $i < 10; $i++): ?>
+		<div class="allow-overscroll">
+			<table class="stats">
+				<thead>
 					<tr>
-						<td>06/2025</td>
-						<td>95</td>
-						<td>10</td>
+						<th>เดือน/ปี</th>
+						<th>จำนวนผู้ลงนัดหมาย</th>
+						<th>จำนวนวันที่นัดหมาย</th>
 					</tr>
-				<?php endfor; ?>
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					<?php for ($i = 0; $i < 10; $i++): ?>
+						<tr>
+							<td>06/2025</td>
+							<td>95</td>
+							<td>10</td>
+						</tr>
+					<?php endfor; ?>
+				</tbody>
+			</table>
+		</div>
 	</main>
 	<?php include "../components/footer.php"; ?>
 </body>
