@@ -1,4 +1,6 @@
 function appointment() {
+	const doctorId = new URL(location.href).searchParams.get("doctor-id") || 1;
+
 	const appointmentDate = document.getElementById("date");
 	const dateErrMsg = document.getElementById("date-err-msg");
 	
@@ -14,6 +16,7 @@ function appointment() {
 	const timeSelector = document.getElementById("time-selector");
 	
 	let activeFieldset = 0;
+	let isFetchingDate = false;
 	
 	changeActiveFieldset();
 
@@ -23,14 +26,16 @@ function appointment() {
 	appointmentDate.addEventListener("change", validateDate);
 	
 	prevBtn.addEventListener("click", function() {
+		// ถ้าอยู่ขั้นตอนที่ 2 ให้กลับไปหน้าเลือกหมอ
 		if (activeFieldset === 0) {
 			location.href = "/";
 			return;
 		}
 
+		// เปลี่ยน field
 		activeFieldset = Math.max(0, activeFieldset - 1);
 		
-		if (activeFieldset !== 2) {
+		if (activeFieldset !== 2) { // ถ้ายังไม่ใช่ช่องสุดท้าย ต้องแน่ใจว่าปุ่มเป็นปุ่มเปลี่ยน field ถัดไป ไม่ใช่ปุ่มส่ง
 			nextBtn.type = "button";
 			nextBtn.innerText = "ต่อไป";
 		}
@@ -39,9 +44,15 @@ function appointment() {
 	});
 
 	nextBtn.addEventListener("click", function(event) {
+		// ถ้าถึงขั้นตอนส่ง ไม่ต้องเปลี่ยน field
 		if (nextBtn.type === "submit")
 			return;
 
+		// ถ้าอยู่ขั้นตอนที่ 2 และยังไม่ได้รับวันที่ อย่าเพิ่งทำขั้นตอนถัดไป
+		if (activeFieldset === 0 && isFetchingDate)
+			return;
+
+		// ตรวจสอบความถูกต้องของฟอร์ม
 		let invalidForm = false;
 
 		const inputs = fieldsets[activeFieldset].querySelectorAll("input");
@@ -52,14 +63,15 @@ function appointment() {
 			}
 		}
 
-		if (invalidForm)
+		if (invalidForm) // ถ้าฟอร์มไม่ถูกต้อง อย่าเพิ่งทำขั้นตอนถัดไป
 			return;
 
 		event.preventDefault();
 
+		// เปลี่ยน field
 		activeFieldset = Math.min(activeFieldset + 1, 2);
 		
-		if (activeFieldset === 2) {
+		if (activeFieldset === 2) { // ถ้า field เป็นสรุป ให้เปลี่ยนปุ่มถัดไป เป็นปุ่มส่งฟอร์ม
 			nextBtn.type = "submit";
 			nextBtn.innerText = "เสร็จสิ้น";
 		}
@@ -74,8 +86,9 @@ function appointment() {
 	});
 
 	function changeActiveFieldset() {
-		window.scrollTo({ top: 0 });
+		window.scrollTo({ top: 0 }); // เลื่อนไปบนสุดของหน้า
 
+		// เปลี่ยนสีของปุ่มขั้นตอนด้านบน (1,2,3,4)
 		stepsList.forEach((step, i) => {
 			if (i === activeFieldset)
 				step.ariaCurrent = "true";
@@ -83,14 +96,16 @@ function appointment() {
 				step.removeAttribute("aria-current");
 		});
 
+		// เปลี่ยน field ให้ field ก่อนหน้าเยื้องอยู่ด้านซ้าย ส่วน field ถัดไปให้เยื้องด้านขวา
 		fieldsets.forEach((fieldset, i) => {
 			modifyFieldsetHeight(fieldset, i);
 
 			fieldset.style.transform = `translate(${Math.sign(i - activeFieldset) * 3}rem)`;
-			fieldset.style.opacity = Number(i === activeFieldset);
-			fieldset.style.zIndex = Number(i === activeFieldset);
+			fieldset.style.opacity = Number(i === activeFieldset);	// ซ่อนโดยใช้ opacity เพื่อ transition ที่สวยงาม
+			fieldset.style.zIndex = Number(i === activeFieldset);	// นำ field ที่เลือกอยู่มาไว้ข้างหน้าให้ผู้ใช้กดได้
 		});
 
+		// ถ้าอยู่ field สุดท้าย (สรุป) ให้ update ผลสรุป
 		if (activeFieldset === 2) {
 			const timeSummary = document.getElementById("time-summary");
 			const symptomSummary = document.getElementById("symptom-summary");
@@ -151,41 +166,41 @@ function appointment() {
 	}
 
 	function createTimeSelectors() {
-		const time = new Date();
-		time.setHours(9);
-		time.setMinutes(0);
-		time.setSeconds(0);
-		time.setMilliseconds(0);
+		const xhr = new XMLHttpRequest();
+		xhr.responseType = "json";
+		
+		xhr.addEventListener("load", function(event) {
+			isFetchingDate = false;
+			timeSelector.innerHTML = null;
 
-		do {
-			if (time.getHours() === 12) {
-				time.setMinutes(time.getMinutes() + 30)
-				continue;
+			const response = event.target.response;
+
+			for (const data of response) {
+				const div = document.createElement("div");
+
+				const input = document.createElement("input");
+				input.type = "radio";
+				input.name = "time";
+				input.id = data.id;
+				input.required = true;
+				input.value = data.time;
+
+				const label = document.createElement("label");
+				label.htmlFor = data.id;
+				label.innerText = data.time;
+				
+				div.appendChild(input);
+				div.appendChild(label);
+
+				timeSelector.appendChild(div);
 			}
+		});
 
-			const timeString = time.getHours() + ":" + time.getMinutes().toString().padStart(2, "0");
-			const timeId = "time-" + time.getHours() + time.getMinutes().toString().padStart(2, "0");
+		xhr.open("GET", `appointment-time.php?doctor-id=${doctorId}&date=${appointmentDate.value}`);
+		xhr.send();
 
-			const div = document.createElement("div");
-
-			const input = document.createElement("input");
-			input.type = "radio";
-			input.name = "time";
-			input.id = timeId;
-			input.required = true;
-			input.value = timeString;
-
-			const label = document.createElement("label");
-			label.htmlFor = timeId;
-			label.innerText = timeString;
-			
-			div.appendChild(input);
-			div.appendChild(label);
-
-			time.setMinutes(time.getMinutes() + 30);
-			timeSelector.appendChild(div);
-
-		} while (time.getHours() < 16);
+		isFetchingDate = true;
+		timeSelector.innerText = "Loading...";
 	}
 }
 
