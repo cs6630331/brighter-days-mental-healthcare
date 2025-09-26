@@ -37,15 +37,9 @@ a:not(:hover) {
 	text-decoration: none;
 }
 
+a.button,
 button {
 	font: inherit;
-}
-
-a.button.big,
-button.big {
-	display: block;
-	width: 100%;
-	max-width: 16rem;
 
 	border: none;
 	background: #BCF3FE;
@@ -56,9 +50,16 @@ button.big {
 
 	transition: background-color 0.2s;
 }
-a.big:hover,
-button.big:hover {
+a.button:hover,
+button:hover {
 	background: #d6f8ff;
+}
+
+a.button.big,
+button.big {
+	display: block;
+	width: 100%;
+	max-width: 16rem;
 }
 
 select,
