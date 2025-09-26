@@ -5,10 +5,16 @@
 	gap: 1rem;
 }
 
-#search > *,
+#search label,
 #doctor-filter label {
 	flex: 1;
 	min-width: 24rem;
+}
+
+#search button {
+	align-self: flex-end;
+	min-width: 12rem;
+	margin-left: auto;
 }
 
 #doctor-filter {
@@ -25,8 +31,13 @@ main select {
 	width: 100%;
 }
 
+.stats th,
 .stats td {
-	text-align: right;
+	padding: 0.5rem;
+}
+.stats th,
+.stats td:not(:last-child) {
+	white-space: nowrap;
 }
 
 .appointment {
