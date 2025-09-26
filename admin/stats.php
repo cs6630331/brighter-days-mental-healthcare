@@ -12,7 +12,7 @@
 	?>
 	<main>
 		<h1>สถิติ</h1>
-		<form action="stats.php" id="doctor-filter">
+		<!-- <form action="stats.php" id="doctor-filter">
 			<label for="doctor">
 				จิตแพทย์ที่ต้องการ
 				<select name="doctor" id="doctor">
@@ -23,24 +23,53 @@
 				</select>
 			</label>
 			<button type="submit" class="big">เลือก</button>
-		</form>
+		</form> -->
 		<div class="allow-overscroll">
 			<table class="stats">
+				<?php
+					include "../connect.php";
+
+					$current_month = date("Y-m%");
+					$stmt = $pdo->prepare("
+						SELECT 
+							`_appointment`.`appointment_id`,
+						    `_appointment`.`appointment_date`,
+						    `_appointment`.`appointment_time`,
+						    CONCAT(`_user`.`user_name`, ' ', `_user`.`user_surname`) AS patient_fullname,
+						    CONCAT(`_doctor`.`doctor_name`, ' ', `_doctor`.`doctor_surname`) AS doctor_fullname,
+						    `_appointment`.`notes`
+						FROM 
+						    `_appointment`
+						JOIN `_doctor` ON `_doctor`.`doctor_id` = `_appointment`.`doctor_id`
+						JOIN `_user` ON `_user`.`user_id` = `_appointment`.`user_id`
+						WHERE 
+						    `_appointment`.`appointment_date` LIKE ? AND
+						    `_appointment`.`status` = 'completed'
+						ORDER BY 
+						    `_appointment`.`appointment_date`, `_appointment`.`appointment_time`
+					");
+					$stmt->bindParam(1, $current_month);
+					$stmt->execute();
+				?>
 				<thead>
 					<tr>
-						<th>เดือน/ปี</th>
-						<th>จำนวนผู้ลงนัดหมาย</th>
-						<th>จำนวนวันที่นัดหมาย</th>
+						<th>วันนัด</th>
+						<th>เวลานัด</th>
+						<th>ผู้ป่วย</th>
+						<th>จิตแพทย์</th>
+						<th>สิ่งที่ต้องการปรึกษา</th>
 					</tr>
 				</thead>
 				<tbody>
-					<?php for ($i = 0; $i < 10; $i++): ?>
+					<?php while ($row = $stmt->fetch()): ?>
 						<tr>
-							<td>06/2025</td>
-							<td>95</td>
-							<td>10</td>
+							<td><?=$row["appointment_date"]?></td>
+							<td><?=$row["appointment_time"]?></td>
+							<td><?=$row["patient_fullname"]?></td>
+							<td><?=$row["doctor_fullname"]?></td>
+							<td><?=$row["notes"]?></td>
 						</tr>
-					<?php endfor; ?>
+					<?php endwhile; ?>
 				</tbody>
 			</table>
 		</div>
