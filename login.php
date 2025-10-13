@@ -18,21 +18,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {   //เช็คว่ากดย�
         $error = 'กรุณากรอกรหัสผ่าน';
     } 
     else {
-        // ค้นหา user
-        $sql = "SELECT user_id, user_name, email, password, is_admin FROM _user WHERE email = ?";
-        $stmt = $conn->prepare($sql);
-        
-        if (!$stmt) {
-            $error = "ข้อผิดพลาด: " . $conn->error;
-        } 
-        else {
-            $stmt->bind_param("s", $email);
-            $stmt->execute();
-            $result = $stmt->get_result();
+        try {
+            $sql = "SELECT user_id, user_name, email, password, is_admin FROM _user WHERE email = :email";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(['email' => $email]);
+            $user = $stmt->fetch();
 
-            if ($result->num_rows > 0) {
-                $user = $result->fetch_assoc();
-                
+            if ($user) {
                 // ตรวจสอบรหัสผ่าน
                 if (password_verify($password, $user['password'])) {
                     // ล็อกอินสำเร็จ
@@ -52,12 +44,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {   //เช็คว่ากดย�
             else {
                 $error = 'ไม่พบอีเมลนี้ในระบบ';
             }
-            $stmt->close();
+        } 
+        catch (PDOException $e) {
+            $error = "ข้อผิดพลาด: " . $e->getMessage();
         }
     }
 }
-
-$conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="th">

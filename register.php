@@ -23,61 +23,73 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $confirm_password = $_POST['confirm-password'] ?? '';
 
     // ตรวจสอบความถูกต้อง
-    if (empty($name)) $error = 'กรุณากรอกชื่อ';
-    elseif (empty($surname)) $error = 'กรุณากรอกนามสกุล';
-    elseif (empty($tel)) $error = 'กรุณากรอกเบอร์โทรศัพท์';
-    elseif (empty($citizen_id)) $error = 'กรุณากรอกรหัสบัตรประชาชน';
-    elseif (strlen($citizen_id) != 13) $error = 'รหัสบัตรประชาชนต้อง 13 หลัก';
-    elseif (strlen($password) < 6) $error = 'รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร';
-    elseif ($password !== $confirm_password) $error = 'รหัสผ่านไม่ตรงกัน';
+    if (empty($name)) {
+        $error = 'กรุณากรอกชื่อ';
+    }
+    elseif (empty($surname)) {
+        $error = 'กรุณากรอกนามสกุล';
+    }
+    elseif (empty($tel)) {
+        $error = 'กรุณากรอกเบอร์โทรศัพท์';
+    }
+    elseif (empty($citizen_id)) {
+        $error = 'กรุณากรอกรหัสบัตรประชาชน';
+    }
+    elseif (strlen($citizen_id) != 13) {
+        $error = 'รหัสบัตรประชาชนต้อง 13 หลัก';
+    }
+    elseif (strlen($password) < 6) {
+        $error = 'รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร';
+    }
+    elseif ($password !== $confirm_password) {
+        $error = 'รหัสผ่านไม่ตรงกัน';
+    }
     else {
-        // ตรวจสอบว่าอีเมลมีอยู่ในระบบแล้วหรือไม่
-        $check_sql = "SELECT user_id FROM _user WHERE email = ?";
-        $check_stmt = $conn->prepare($check_sql);
-        if (!$check_stmt) {
-            $error = "ข้อผิดพลาด: " . $conn->error;
-        } else {
-            $check_stmt->bind_param("s", $email);
-            $check_stmt->execute();
-            $result = $check_stmt->get_result();
-            
-            if ($result->num_rows > 0) {
+        try {
+            // ตรวจสอบว่าอีเมลมีอยู่ในระบบแล้วหรือไม่
+            $check_sql = "SELECT user_id FROM _user WHERE email = :email";
+            $check_stmt = $pdo->prepare($check_sql);
+            $check_stmt->execute(['email' => $email]);
+            $existing_user = $check_stmt->fetch();
+
+            if ($existing_user) {
                 $error = 'อีเมลนี้ถูกใช้ไปแล้ว';
-            } else {
+            }
+            else {
                 // บันทึกข้อมูล
                 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-                $insert_sql = "INSERT INTO _user (user_name, user_surname, email, user_tel, citizen_id, password, is_admin) 
-                               VALUES (?, ?, ?, ?, ?, ?, 0)";
-                $insert_stmt = $conn->prepare($insert_sql);
                 
-                if (!$insert_stmt) {
-                    $error = "ข้อผิดพลาด: " . $conn->error;
-                } else {
-                    $insert_stmt->bind_param("ssssss", $name, $surname, $email, $tel, $citizen_id, $hashed_password);
-                    
-                    if ($insert_stmt->execute()) {
-                        // ล้าง session OTP
-                        unset($_SESSION['otp_verified']);
-                        unset($_SESSION['verified_email']);
-                        
-                        $success = 'ลงทะเบียนสำเร็จ! กำลังเปลี่ยนไปยังหน้าเข้าสู่ระบบ...';
-                        echo "<script>
-                            setTimeout(function() {
-                                window.location.href = 'login.php';
-                            }, 2000);
-                        </script>";
-                    } else {
-                        $error = 'เกิดข้อผิดพลาดในการลงทะเบียน: ' . $insert_stmt->error;
-                    }
-                    $insert_stmt->close();
-                }
+                $insert_sql = "INSERT INTO _user (user_name, user_surname, email, user_tel, citizen_id, password, is_admin) 
+                               VALUES (:name, :surname, :email, :tel, :citizen_id, :password, 0)";
+                
+                $insert_stmt = $pdo->prepare($insert_sql);
+                
+                $insert_stmt->execute([
+                    ':name' => $name,
+                    ':surname' => $surname,
+                    ':email' => $email,
+                    ':tel' => $tel,
+                    ':citizen_id' => $citizen_id,
+                    ':password' => $hashed_password
+                ]);
+
+                // ล้าง session OTP
+                unset($_SESSION['otp_verified']);
+                unset($_SESSION['verified_email']);
+                
+                $success = 'ลงทะเบียนสำเร็จ! กำลังเปลี่ยนไปยังหน้าเข้าสู่ระบบ...';
+                echo "<script>
+                    setTimeout(function() {
+                        window.location.href = 'login.php';
+                    }, 2000);
+                </script>";
             }
-            $check_stmt->close();
+        }
+        catch (PDOException $e) {
+            $error = 'เกิดข้อผิดพลาดในการลงทะเบียน: ' . $e->getMessage();
         }
     }
 }
-
-$conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="th">
