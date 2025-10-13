@@ -7,11 +7,8 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: #f8f9fc;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     min-height: 100vh;
-    padding: 20px;
+    padding: 30px 20px;
 }
 
 .container {
@@ -19,8 +16,8 @@ body {
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     padding: 40px;
-    max-width: 450px;
-    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .logo {
@@ -44,18 +41,22 @@ h2 {
     text-align: center;
     font-size: 20px;
     color: #333;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     font-weight: 500;
 }
 
-.login-icon {
-    text-align: center;
-    font-size: 40px;
-    margin-bottom: 15px;
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.form-row.full {
+    grid-template-columns: 1fr;
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 
 label {
@@ -66,8 +67,12 @@ label {
     font-size: 13px;
 }
 
+input[type="text"],
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="tel"],
+input[type="date"],
+select {
     width: 100%;
     padding: 10px 12px;
     border: 1px solid #ddd;
@@ -77,8 +82,12 @@ input[type="password"] {
     background: #fafbfc;
 }
 
+input[type="text"]:focus,
 input[type="email"]:focus,
-input[type="password"]:focus {
+input[type="password"]:focus,
+input[type="tel"]:focus,
+input[type="date"]:focus,
+select:focus {
     outline: none;
     border-color: #b0d4ff;
     background: white;
@@ -95,6 +104,16 @@ input[type="password"]:focus {
     font-size: 13px;
 }
 
+.success-message {
+    background: #f0fdf4;
+    color: #15803d;
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    border: 1px solid #bbf7d0;
+    font-size: 13px;
+}
+
 button {
     width: 100%;
     padding: 11px;
@@ -105,8 +124,8 @@ button {
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s;
     margin-top: 5px;
+    transition: background 0.2s;
 }
 
 button:hover {
@@ -117,33 +136,9 @@ button:active {
     background: #85bfff;
 }
 
-.forgot-password {
-    text-align: right;
-    margin-top: -5px;
-    margin-bottom: 10px;
-}
-
-.forgot-password a {
-    color: #888;
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: 400;
-    transition: color 0.2s;
-}
-
-.forgot-password a:hover {
-    color: #666;
-    text-decoration: underline;
-}
-
-.footer-links {
+.footer-text {
     text-align: center;
     margin-top: 20px;
-    padding-top: 15px;
-    border-top: 1px solid #eee;
-}
-
-.footer-text {
     color: #999;
     font-size: 13px;
 }
@@ -159,18 +154,60 @@ button:active {
     color: #333;
 }
 
+.email-display {
+    text-align: center;
+    background: #f0f7ff;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    color: #666;
+    font-weight: 400;
+    font-size: 13px;
+    border: 1px solid #e0f0ff;
+}
+
 /* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .container {
+        padding: 30px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+}
+
 @media (max-width: 480px) {
     .container {
-        padding: 30px 20px;
+        padding: 25px;
+    }
+
+    .logo h1 {
+        font-size: 18px;
     }
 
     h2 {
         font-size: 18px;
-        margin-bottom: 20px;
+        margin-bottom: 18px;
     }
 
-    label {
-        margin-bottom: 5px;
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="tel"],
+    input[type="date"],
+    select {
+        font-size: 16px;
+        padding: 11px 12px;
     }
 }
