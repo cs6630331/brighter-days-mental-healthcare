@@ -1,1 +1,5 @@
+otp_log.txt
+test_bug.php
 connect.php
+vendor/
+*.log
