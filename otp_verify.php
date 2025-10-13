@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['otp_verified'] = true;
         $_SESSION['verified_email'] = $email;
         unset($_SESSION['otp']);
-        header("Location: registerr.php");
+        header("Location: register.php");
         exit();
     } else {
         $_SESSION['otp_error'] = 'รหัส OTP ไม่ถูกต้อง โปรดลองใหม่';
