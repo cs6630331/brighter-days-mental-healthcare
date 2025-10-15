@@ -19,7 +19,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     padding: 40px;
-    max-width: 450px;
+    max-width: 500px;
     width: 100%;
 }
 
@@ -40,18 +40,16 @@ body {
     font-size: 13px;
 }
 
-h2 {
+.form-section {
+    margin-bottom: 30px;
+}
+
+.form-section h2 {
     text-align: center;
     font-size: 20px;
     color: #333;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     font-weight: 500;
-}
-
-.login-icon {
-    text-align: center;
-    font-size: 40px;
-    margin-bottom: 15px;
 }
 
 .form-group {
@@ -67,7 +65,9 @@ label {
 }
 
 input[type="email"],
-input[type="password"] {
+input[type="text"],
+input[type="password"],
+select {
     width: 100%;
     padding: 10px 12px;
     border: 1px solid #ddd;
@@ -78,21 +78,13 @@ input[type="password"] {
 }
 
 input[type="email"]:focus,
-input[type="password"]:focus {
+input[type="text"]:focus,
+input[type="password"]:focus,
+select:focus {
     outline: none;
     border-color: #b0d4ff;
     background: white;
     box-shadow: 0 0 0 3px rgba(176, 212, 255, 0.2);
-}
-
-.error-message {
-    background: #fff0f0;
-    color: #d32f2f;
-    padding: 10px 12px;
-    border-radius: 6px;
-    margin-bottom: 15px;
-    border: 1px solid #ffdddd;
-    font-size: 13px;
 }
 
 button {
@@ -106,7 +98,6 @@ button {
     font-weight: 600;
     cursor: pointer;
     transition: background 0.2s;
-    margin-top: 5px;
 }
 
 button:hover {
@@ -117,33 +108,9 @@ button:active {
     background: #85bfff;
 }
 
-.forgot-password {
-    text-align: right;
-    margin-top: -5px;
-    margin-bottom: 10px;
-}
-
-.forgot-password a {
-    color: #888;
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: 400;
-    transition: color 0.2s;
-}
-
-.forgot-password a:hover {
-    color: #666;
-    text-decoration: underline;
-}
-
-.footer-links {
+.footer-text {
     text-align: center;
     margin-top: 20px;
-    padding-top: 15px;
-    border-top: 1px solid #eee;
-}
-
-.footer-text {
     color: #999;
     font-size: 13px;
 }
@@ -159,18 +126,29 @@ button:active {
     color: #333;
 }
 
+.error-message {
+    background: #fff0f0;
+    color: #d32f2f;
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    border: 1px solid #ffdddd;
+    font-size: 13px;
+    display: none;
+}
+
+.error-message.show {
+    display: block;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 480px) {
     .container {
         padding: 30px 20px;
     }
 
-    h2 {
+    .form-section h2 {
         font-size: 18px;
         margin-bottom: 20px;
-    }
-
-    label {
-        margin-bottom: 5px;
     }
 }
