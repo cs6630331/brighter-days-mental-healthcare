@@ -1,3 +1,4 @@
+<?php $logged_in = isset($_SESSION["user_id"]); ?>
 <header id="site-nav">
 	<h1><a href="/">BDMH</a></h1>
 	<input type="checkbox" id="menu-button">
