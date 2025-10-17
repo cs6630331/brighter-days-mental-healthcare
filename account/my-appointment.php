@@ -21,15 +21,34 @@
 		<h1>นัดหมายของฉัน</h1>
 		<section>
 			<article class="appointment">
-				<h2 class="text-center">พ.ญ. เพชรกัญญา มีญาณทิพย์</h2>
-				<p class="text-center">
-					<time datetime="2025-08-11">
-						วันจันทร์ที่ 11 ส.ค. 2568 13:00 น.
-					</time>
-				</p>
-				<h3>สิ่งที่ต้องการปรึกษา</h3>
-				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati qui ab deserunt aut iusto? Magni officia repudiandae temporibus possimus. Nulla a repudiandae necessitatibus vero natus maxime aperiam nemo, itaque id.</p>
-				<p style="text-align: right;"><a href="#" type="submit">ยกเลิกเวลานัด</a></p>
+				<?php if ($_SESSION["user_appointment"]): ?>
+					<h2 class="text-center"><?=$_SESSION["user_appointment"]["doctor_fullname"]?></h2>
+					<p class="text-center">
+						<?php
+							$appmt_time = $_SESSION["user_appointment"]["date"] . "T" . $_SESSION["user_appointment"]["time"];
+							$appmt_year = date("Y", strtotime($appmt_time)) + 543;
+							$appmt_month = date("m", strtotime($appmt_time));
+							$appmt_date = date("d", strtotime($appmt_time));
+							$appmt_dayofweek = date("w", strtotime($appmt_time));
+							$appmt_time = date("H:i", strtotime($appmt_time));
+
+							$th_day_arr = ["อาทิตย์","จันทร์","อังคาร","พุธ","พฤหัสบดี","ศุกร์","เสาร์"];
+							$th_month_arr = ["","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."];
+
+							$appmt_dayofweek = $th_day_arr[$appmt_dayofweek];
+							$appmt_month = $th_month_arr[$appmt_month];
+						?>
+						<time datetime="<?=$appmt_time?>">
+							วัน<?=$appmt_dayofweek?>ที่ <?=$appmt_date?> <?=$appmt_month?> <?=$appmt_year?> เวลา <?=$appmt_time?> น.
+						</time>
+					</p>
+					<h3>สิ่งที่ต้องการปรึกษา</h3>
+					<p><?=$_SESSION["user_appointment"]["notes"]?></p>
+					<p style="text-align: right;"><a href="#" type="submit">ยกเลิกเวลานัด</a></p>
+				<?php else: ?>
+					<h2 class="text-center">ไม่พบนัดหมาย</h2>
+					<a href="/" class="button big margin-center text-center">ทำนัด</a>
+				<?php endif; ?>
 			</article>
 		</section>
 	</main>
