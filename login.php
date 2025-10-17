@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {   //เช็คว่ากดย�
     } 
     else {
         try {
-            $sql = "SELECT user_id, user_name, email, password, is_admin FROM _user WHERE email = :email";
+            $sql = "SELECT user_id, user_name, user_surname, user_tel, citizen_id, email, password, is_admin FROM _user WHERE email = :email";
 
             $stmt = $pdo->prepare($sql);
             $stmt->execute(['email' => $email]);
@@ -35,8 +35,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {   //เช็คว่ากดย�
                 if (password_verify($password, $user['password'])) {
                     // ล็อกอินสำเร็จ
                     $_SESSION['user_id'] = $user['user_id'];
-                    $_SESSION['user_name'] = $user['user_name'];
-                    $_SESSION['email'] = $user['email'];
+                    $_SESSION['user_detail'] = [
+                        "name" => $user['user_name'],
+                        "surname" => $user['user_surname'],
+                        "phone_number" => $user['user_tel'],
+                        "citizen_id" => $user['citizen_id']
+                    ];
                     $_SESSION['is_admin'] = $user['is_admin'];
                     $_SESSION['login_time'] = time();
 
