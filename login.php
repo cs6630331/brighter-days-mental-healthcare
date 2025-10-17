@@ -2,6 +2,11 @@
 session_start();
 require 'connect.php'; //โหลดไฟล์ที่เชื่อม database
 
+if (!empty($_SESSION["user_id"])) {
+    header("Location: /account/my-info.php");
+    die();
+}
+
 $error = ''; //เก็บข้อความ error
 $email = '';
 
@@ -19,7 +24,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {   //เช็คว่ากดย�
     } 
     else {
         try {
-            $sql = "SELECT user_id, user_name, email, password, is_admin FROM _user WHERE email = :email";
+            $sql = "SELECT user_id, user_name, user_surname, user_tel, citizen_id, email, password, is_admin FROM _user WHERE email = :email";
+
             $stmt = $pdo->prepare($sql);
             $stmt->execute(['email' => $email]);
             $user = $stmt->fetch();
@@ -29,10 +35,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {   //เช็คว่ากดย�
                 if (password_verify($password, $user['password'])) {
                     // ล็อกอินสำเร็จ
                     $_SESSION['user_id'] = $user['user_id'];
-                    $_SESSION['user_name'] = $user['user_name'];
-                    $_SESSION['email'] = $user['email'];
+                    $_SESSION['user_detail'] = [
+                        "name" => $user['user_name'],
+                        "surname" => $user['user_surname'],
+                        "phone_number" => $user['user_tel'],
+                        "citizen_id" => $user['citizen_id']
+                    ];
                     $_SESSION['is_admin'] = $user['is_admin'];
                     $_SESSION['login_time'] = time();
+
+                    // เก็บรายละเอียดการนัดด้วย
+                    $sql2 = "
+                        SELECT appointment_id, appointment_date, appointment_time, notes, CONCAT(doctor_name, ' ', doctor_surname) AS doctor_fullname FROM `_appointment`
+                        JOIN `_doctor` ON `_doctor`.doctor_id = `_appointment`.doctor_id
+                        WHERE user_id = ? AND status = 'confirmed'
+                    ";
+
+                    $stmt2 = $pdo->prepare($sql2);
+                    $stmt2->bindParam(1, $user['user_id']);
+                    $stmt2->execute();
+                    $appmt = $stmt2->fetch();
+
+                    if ($appmt) {
+                        $_SESSION['user_appointment'] = [
+                            "id" => $appmt["appointment_id"],
+                            "date" => $appmt["appointment_date"],
+                            "time" => $appmt["appointment_time"],
+                            "notes" => $appmt["notes"],
+                            "doctor_fullname" => $appmt["doctor_fullname"]
+                        ];
+                    }
+                    else {
+                        $_SESSION['user_appointment'] = [];
+                    }
 
                     // เปลี่ยนไปหน้าแรก
                     header("Location: index.php");
@@ -61,6 +96,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {   //เช็คว่ากดย�
 </head>
 <body>
     <div class="container">
+        <a href="/" class="back-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+            </svg>
+        </a>
         <div class="logo">
             <h1>🌟 Brighter Days</h1>
             <p>Mental Healthcare</p>
