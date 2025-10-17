@@ -2,6 +2,11 @@
 session_start();
 require 'connect.php'; //โหลดไฟล์ที่เชื่อม database
 
+if (!empty($_SESSION["user_id"])) {
+    header("Location: /account/my-info.php");
+    die();
+}
+
 $error = ''; //เก็บข้อความ error
 $email = '';
 

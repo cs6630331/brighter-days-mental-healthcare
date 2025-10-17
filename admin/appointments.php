@@ -1,3 +1,12 @@
+<?php
+	include "../init.php";
+
+	if (!$_SESSION["is_admin"]) {
+		header("Location: /");
+		die();
+	}
+?>
+
 <!DOCTYPE html>
 <html lang="th">
 <head>

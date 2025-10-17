@@ -1,3 +1,11 @@
+<?php
+	include "init.php";
+	# redirect ไปหน้า My Appointment ถ้าผู้ใช้ลงวันนัดไว้แล้ว
+	if (isset($_SESSION["user_appointment"]) || !empty($_SESSION["user_appointment"])) {
+		header("Location: /account/my-appointment.php");
+		die();
+	}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
