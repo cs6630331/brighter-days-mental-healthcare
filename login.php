@@ -25,6 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {   //เช็คว่ากดย�
     else {
         try {
             $sql = "SELECT user_id, user_name, email, password, is_admin FROM _user WHERE email = :email";
+
             $stmt = $pdo->prepare($sql);
             $stmt->execute(['email' => $email]);
             $user = $stmt->fetch();
@@ -38,6 +39,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {   //เช็คว่ากดย�
                     $_SESSION['email'] = $user['email'];
                     $_SESSION['is_admin'] = $user['is_admin'];
                     $_SESSION['login_time'] = time();
+
+                    // เก็บรายละเอียดการนัดด้วย
+                    $sql2 = "
+                        SELECT appointment_id, appointment_date, appointment_time, notes, CONCAT(doctor_name, ' ', doctor_surname) AS doctor_fullname FROM `_appointment`
+                        JOIN `_doctor` ON `_doctor`.doctor_id = `_appointment`.doctor_id
+                        WHERE user_id = ? AND status = 'confirmed'
+                    ";
+
+                    $stmt2 = $pdo->prepare($sql2);
+                    $stmt2->bindParam(1, $user['user_id']);
+                    $stmt2->execute();
+                    $appmt = $stmt2->fetch();
+
+                    if ($appmt) {
+                        $_SESSION['user_appointment'] = [
+                            "id" => $appmt["appointment_id"],
+                            "date" => $appmt["appointment_date"],
+                            "time" => $appmt["appointment_time"],
+                            "notes" => $appmt["notes"],
+                            "doctor_fullname" => $appmt["doctor_fullname"]
+                        ];
+                    }
+                    else {
+                        $_SESSION['user_appointment'] = [];
+                    }
 
                     // เปลี่ยนไปหน้าแรก
                     header("Location: index.php");
