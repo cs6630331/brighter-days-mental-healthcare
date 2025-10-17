@@ -19,7 +19,7 @@
 			?>
 			<?php while ($row = $stmt->fetch()): ?>
 				<article class="doc-card">
-					<!-- <img src="/img/doctor.png" alt="รูปภาพของ พ.ญ. เพชรกัญญา มีญาณทิพย์"> -->
+					<img src="/img/doctor.png" alt="รูปภาพของ พ.ญ. เพชรกัญญา มีญาณทิพย์">
 					<p><b><?=$row["doctor_fullname"]?></b></p>
 					<div>
 						<a class="button" class="button" href="/appointment.php?id=<?=$row["doctor_id"]?>">
