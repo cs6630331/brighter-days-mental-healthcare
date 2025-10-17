@@ -15,12 +15,32 @@ body {
 }
 
 .container {
+    position: relative;
     background: white;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     padding: 40px;
     max-width: 450px;
     width: 100%;
+}
+
+.container a {
+    color: #888;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 400;
+    transition: color 0.2s;
+}
+
+.container a:hover {
+    color: #666;
+    text-decoration: underline;
+}
+
+.back-btn {
+    position: absolute;
+    top: 16px;
+    left: 16px;
 }
 
 .logo {
@@ -121,19 +141,6 @@ button:active {
     text-align: right;
     margin-top: -5px;
     margin-bottom: 10px;
-}
-
-.forgot-password a {
-    color: #888;
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: 400;
-    transition: color 0.2s;
-}
-
-.forgot-password a:hover {
-    color: #666;
-    text-decoration: underline;
 }
 
 .footer-links {
