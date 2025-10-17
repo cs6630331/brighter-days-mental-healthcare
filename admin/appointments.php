@@ -22,10 +22,7 @@
 	</script>
 </head>
 <body>
-	<?php
-		$logged_in = true;
-		include "../components/header.php";
-	?>
+	<?php include "../components/header.php"; ?>
 	<main>
 		<h1>ค้นหานัดหมาย</h1>
 		<form id="search">

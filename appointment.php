@@ -1,8 +1,25 @@
 <?php
 	include "init.php";
+	include "connect.php";
+	
 	# redirect ไปหน้า My Appointment ถ้าผู้ใช้ลงวันนัดไว้แล้ว
 	if (isset($_SESSION["user_appointment"]) || !empty($_SESSION["user_appointment"])) {
 		header("Location: /account/my-appointment.php");
+		die();
+	}
+
+	if (!isset($_GET["id"]) || empty($_GET["id"])) {
+		echo "ไม่พบจิตแพทย์ดังกล่าว";
+		die();
+	}
+
+	$stmt = $pdo->prepare("SELECT CONCAT(doctor_name, ' ', doctor_surname) AS doctor_fullname FROM `_doctor` WHERE doctor_id = ?");
+	$stmt->bindParam(1, $_GET["id"]);
+	$stmt->execute();
+	$row = $stmt->fetch();
+
+	if (!$row) {
+		echo "ไม่พบจิตแพทย์ดังกล่าว";
 		die();
 	}
 ?>
@@ -15,10 +32,7 @@
 	<script src="/script/appointment.js"></script>
 </head>
 <body>
-	<?php
-		$logged_in = true;
-		include "./components/header.php";
-	?>
+	<?php include "./components/header.php"; ?>
 	<main>
 		<ol class="steps">
 			<li>เริ่ม</li>
@@ -28,6 +42,7 @@
 		</ol>
 		<hr>
 		<form action="#">
+			<input type="hidden" name="id" value="<?=$GET["id"]?>">
 			<div id="appointment-form">
 				<fieldset>
 					<?php
@@ -62,7 +77,7 @@
 				</fieldset>
 				<section>
 					<article class="appointment">
-						<h2 class="text-center">พ.ญ. เพชรกัญญา มีญาณทิพย์</h2>
+						<h2 class="text-center"><?=$row["doctor_fullname"]?></h2>
 						<p class="text-center">
 							<time datetime="NaN" id="time-summary"></time>
 						</p>

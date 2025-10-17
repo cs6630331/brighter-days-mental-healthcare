@@ -15,10 +15,7 @@
 	<link rel="stylesheet" href="/style/account.css">
 </head>
 <body>
-	<?php
-		$logged_in = true;
-		include "../components/header.php";
-	?>
+	<?php include "../components/header.php"; ?>
 	<main>
 		<?php include "../components/account-nav.php" ?>
 		<h1>นัดหมายของฉัน</h1>

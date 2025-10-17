@@ -15,10 +15,7 @@
 	<link rel="stylesheet" href="../style/admin.css">
 </head>
 <body>
-	<?php
-		$logged_in = true;
-		include "../components/header.php";
-	?>
+	<?php include "../components/header.php"; ?>
 	<main>
 		<h1>สถิติ</h1>
 		<!-- <form action="stats.php" id="doctor-filter">
