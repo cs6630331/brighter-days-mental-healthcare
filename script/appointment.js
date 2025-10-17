@@ -55,7 +55,7 @@ function appointment() {
 		// ตรวจสอบความถูกต้องของฟอร์ม
 		let invalidForm = false;
 
-		const inputs = fieldsets[activeFieldset].querySelectorAll("input");
+		const inputs = fieldsets[activeFieldset].querySelectorAll("input, select, textarea");
 		for (let input of inputs) {
 			if (!input.reportValidity()) {
 				invalidForm = true;
