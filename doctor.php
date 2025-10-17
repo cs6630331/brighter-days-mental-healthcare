@@ -6,20 +6,34 @@
 	<link rel="stylesheet" href="style/doctor.css">
 </head>
 <body>
+	<?php include "./components/header.php"; ?>
 	<?php
-		$logged_in = false;
-		include "./components/header.php";
+		include "connect.php";
+
+		if (!isset($_GET["id"]) || empty($_GET["id"])) {
+			echo "ไม่พบจิตแพทย์ดังกล่าว";
+			die();
+		}
+
+		$stmt = $pdo->prepare("SELECT * FROM `_doctor` WHERE doctor_id = ?");
+		$stmt->bindParam(1, $_GET["id"]);
+		$stmt->execute();
+		$row = $stmt->fetch();
+		
+		if (!$row) {
+			echo "ไม่พบจิตแพทย์ดังกล่าว";
+			die();
+		}
 	?>
 	<main>
 		<article class="doctor-details">
 			<img src="/img/doctor.png" alt="Doctor">
 			<div>
 				<hgroup>
-					<h1>พ.ญ. เพชรกัญญา มีญาณทิพย์</h1>
-					<p>Petkanya Meeyantip, M.D.</p>
+					<h1><?=$row["doctor_name"]?> <?=$row["doctor_surname"]?></h1>
 				</hgroup>
 				<hr>
-				<p>ภาษา ไทย, อังกฤษ</p>
+				<p><?=$row["doctor_education"]?></p>
 			</div>
 		</article>
 		<h2 class="text-center">ตารางออกตรวจ</h2>
@@ -38,52 +52,18 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>
-							<div class="timeline">
-								09:00-12:00
-							</div>
-							<div class="timeline"></div>
-						</td>
-						<td>
-							<div class="timeline">
-								09:00-12:00
-							</div>
-							<div class="timeline">
-								13:00-16:00
-							</div>
-						</td>
-						<td>
-							<div class="timeline"></div>
-							<div class="timeline"></div>
-						</td>
-						<td>
-							<div class="timeline">
-								09:00-12:00
-							</div>
-							<div class="timeline">
-								13:00-16:00
-							</div>
-						</td>
-						<td>
-							<div class="timeline"></div>
-							<div class="timeline"></div>
-						</td>
-						<td>
-							<div class="timeline"></div>
-							<div class="timeline"></div>
-						</td>
-						<td>
-							<div class="timeline"></div>
-							<div class="timeline">
-								13:00-16:00
-							</div>
-						</td>
+						<?php for ($i = 0; $i < 7; ++$i): ?>
+							<td>
+								<div class="timeline"><?php if ($row["morning_shift"] == 1): ?>09:00-12:00<?php endif; ?></div>
+								<div class="timeline"><?php if ($row["afternoon_shift"] == 1): ?>13:00-16:00<?php endif; ?></div>
+							</td>
+						<?php endfor; ?>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 		<div class="separated">
-			<a href="/appointment.html" class="button big text-center margin-center">ทำนัด</a>
+			<a href="/appointment.php?id=<?=$row["doctor_id"]?>" class="button big text-center margin-center">ทำนัด</a>
 		</div>
 	</main>
 	<?php include "./components/footer.php"; ?>
