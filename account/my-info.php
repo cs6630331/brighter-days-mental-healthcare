@@ -20,7 +20,8 @@
 		<?php include "../components/account-nav.php" ?>
 		<h1>ข้อมูลของฉัน</h1>
 		<section>
-			<form class="account-details">
+			<?php include "../components/notice-box.php" ?>
+			<form class="account-details" action="update-info.php" method="POST">
 				<label for="name">
 					ชื่อ
 					<input required type="text" name="name" id="name" value="<?=$_SESSION["user_detail"]["name"]?>">
