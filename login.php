@@ -49,9 +49,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {   //เช็คว่ากดย�
 
                     // เก็บรายละเอียดการนัดด้วย
                     $sql2 = "
-                        SELECT appointment_id, appointment_date, appointment_time, notes, CONCAT(doctor_name, ' ', doctor_surname) AS doctor_fullname FROM `_appointment`
-                        JOIN `_doctor` ON `_doctor`.doctor_id = `_appointment`.doctor_id
-                        WHERE user_id = ? AND status = 'confirmed'
+                        SELECT
+                            appointment_id,
+                            appointment_date,
+                            appointment_time,
+                            notes,
+                            CONCAT(doctor_name, ' ', doctor_surname) AS doctor_fullname,
+                            `_appointment`.doctor_id
+                        FROM
+                            `_appointment`
+                        JOIN
+                            `_doctor` ON `_doctor`.doctor_id = `_appointment`.doctor_id
+                        WHERE
+                            user_id = ? AND status = 'confirmed'
                     ";
 
                     $stmt2 = $pdo->prepare($sql2);
@@ -65,6 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {   //เช็คว่ากดย�
                             "date" => $appmt["appointment_date"],
                             "time" => $appmt["appointment_time"],
                             "notes" => $appmt["notes"],
+                            "doctor_id" => $appmt["doctor_id"],
                             "doctor_fullname" => $appmt["doctor_fullname"]
                         ];
                     }

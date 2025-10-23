@@ -44,7 +44,10 @@
 					</p>
 					<h3>สิ่งที่ต้องการปรึกษา</h3>
 					<p><?=$_SESSION["user_appointment"]["notes"]?></p>
-					<p style="text-align: right;"><a href="#" type="submit">ยกเลิกเวลานัด</a></p>
+					<div style="text-align: right;">
+						<a class="button" href="pospone-appointment.php">เลื่อนนัดหมาย</a>
+						<a class="button" href="cancel-appointment.php">ยกเลิกนัดหมาย</a>
+					</div>
 				<?php else: ?>
 					<h2 class="text-center">ไม่พบนัดหมาย</h2>
 					<a href="/" class="button big margin-center text-center">ทำนัด</a>

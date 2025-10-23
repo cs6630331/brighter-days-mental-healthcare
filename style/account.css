@@ -22,6 +22,30 @@ main select {
 	width: 100%;
 }
 
+input[type="radio"] {
+	position: absolute;
+	top: -2000px;
+	opacity: 0;
+}
+
+input[type="radio"] ~ label {
+	padding: 0.5rem;
+	border-radius: 0.5rem;
+	text-align: center;
+
+	background: #e4e4e4;
+	color: #000;
+
+	user-select: none;
+}
+input[type="radio"]:checked ~ label {
+	background: #D0E7FF;
+}
+
+label[for="date"] {
+	width: fit-content;
+}
+
 .account-details {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
@@ -83,6 +107,22 @@ main select {
 	color: #ffffff;
 }
 
+#time-selector {
+	max-width: 26rem;
+	margin: 1.5rem auto;
+
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+	gap: 1rem;
+}
+#time-selector div {
+	position: relative;
+}
+#time-selector input {
+	position: absolute;
+	inset: 0;
+}
+
 @media (max-width: 768px) {
 	main {
 		display: block;
@@ -108,7 +148,13 @@ main select {
 	.account-details {
 		display: block;
 	}
-	label {
+	
+	main label {
 		margin: 1.5rem 0;
+	}
+
+	.detail-card,
+	#time-selector {
+		display: block;
 	}
 }
