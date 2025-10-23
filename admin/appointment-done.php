@@ -18,6 +18,8 @@ $stmt = $pdo->prepare("UPDATE `_appointment` SET `status` = 'completed' WHERE `a
 $stmt->bindParam(1, $_GET["appointment-id"]);
 
 if ($stmt->execute()) {
+	setcookie("notice", "ทำนัดหมาย #" . $_GET["appointment-id"] . " เสร็จสิ้นเรียบร้อยแล้ว");
+
 	header("Location: appointments.php");
 	die();
 }
