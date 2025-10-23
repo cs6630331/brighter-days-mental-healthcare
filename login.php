@@ -33,6 +33,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {   //เช็คว่ากดย�
             if ($user) {
                 // ตรวจสอบรหัสผ่าน
                 if (password_verify($password, $user['password'])) {
+                    // สร้าง Session ID ใหม่ ป้องกัน Session Fixation
+                    session_regenerate_id();
+
                     // ล็อกอินสำเร็จ
                     $_SESSION['user_id'] = $user['user_id'];
                     $_SESSION['user_detail'] = [
