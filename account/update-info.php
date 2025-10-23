@@ -29,7 +29,7 @@ if ($stmt->execute()) {
 	];
 
 	header("Location: my-info.php");
-	setcookie("notice", "update-info;อัพเดตข้อมูลสำเร็จ");
+	setcookie("notice", "อัพเดตข้อมูลสำเร็จ");
 }
 else {
 	echo "เกิดข้อผิดพลาดระหว่างอัพเดตข้อมูล";
