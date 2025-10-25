@@ -45,6 +45,9 @@ input[type="radio"]:checked ~ label {
 label[for="date"] {
 	width: fit-content;
 }
+label[for="current-password"] {
+	grid-column: span 2;
+}
 
 .account-details {
 	display: grid;
@@ -121,6 +124,10 @@ label[for="date"] {
 #time-selector input {
 	position: absolute;
 	inset: 0;
+}
+
+#password-result {
+	color: red;
 }
 
 @media (max-width: 768px) {

@@ -3,6 +3,7 @@
 		<ul>
 			<li><a href="/account/my-info.php">ข้อมูลของฉัน</a></li>
 			<li><a href="/account/my-appointment.php">นัดหมายของฉัน</a></li>
+			<li><a href="/account/change-password.php">เปลี่ยนรหัสผ่าน</a></li>
 			<li><a href="logout.php">ออกจากระบบ</a></li>
 		</ul>
 	</nav>
