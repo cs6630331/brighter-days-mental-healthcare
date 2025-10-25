@@ -55,3 +55,8 @@ main select {
 
 	margin: 1rem 0;
 }
+
+.id-number {
+	float: right;
+	color: #888;
+}

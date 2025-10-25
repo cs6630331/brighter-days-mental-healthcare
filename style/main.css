@@ -192,6 +192,28 @@ footer nav a {
 	overflow-x: auto;
 }
 
+.notice {
+	margin: 1rem 0;
+	padding: 0.5rem 1rem;
+
+	background: rgb(240, 240, 255);
+	color: rgb(24, 24, 144);
+	border: 1px solid;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.notice button.close {
+	background: none;
+	color: inherit;
+
+	padding: 0;
+}
+.notice div svg {
+	vertical-align: middle;
+}
+
 footer address li,
 .login > span {
 	display: flex;
