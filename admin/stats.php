@@ -16,20 +16,26 @@
 </head>
 <body>
 	<?php include "../components/header.php"; ?>
+	<?php
+		$month_number = date("m");
+		$th_month_arr = [
+		    "",
+		    "มกราคม",
+		    "กุมภาพันธ์",
+		    "มีนาคม",
+		    "เมษายน",
+		    "พฤษภาคม",
+		    "มิถุนายน",
+		    "กรกฎาคม",
+		    "สิงหาคม",
+		    "กันยายน",
+		    "ตุลาคม",
+		    "พฤศจิกายน",
+		    "ธันวาคม"
+		];
+	?>
 	<main>
-		<h1>สถิติ</h1>
-		<!-- <form action="stats.php" id="doctor-filter">
-			<label for="doctor">
-				จิตแพทย์ที่ต้องการ
-				<select name="doctor" id="doctor">
-					<option value="-1">-----</option>
-					<?php for ($i = 0; $i < 9; $i++): ?>
-						<option value="1">เพชรกัญญา มีญาณทิพย์</option>
-					<?php endfor; ?>
-				</select>
-			</label>
-			<button type="submit" class="big">เลือก</button>
-		</form> -->
+		<h1>สถิติ เดือน <?=$th_month_arr[$month_number]?></h1>
 		<div class="allow-overscroll">
 			<table class="stats">
 				<?php

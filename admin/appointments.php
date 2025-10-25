@@ -37,6 +37,7 @@
 			</label>
 			<button type="submit">Search</button>
 		</form>
+		<?php include "../components/notice-box.php" ?>
 		<?php
 			include "../connect.php";
 
@@ -84,6 +85,7 @@
 		<?php while ($row = $stmt->fetch()): ?>
 			<hr>
 			<article class="appointment">
+				<span class="id-number">#<?=$row["appointment_id"]?></span>
 				<hgroup>
 					<h2><?=$row["patient_fullname"]?></h2>
 					<p>ต้องพบกับจิตแพทย์ <?=$row["doctor_fullname"]?></p>
