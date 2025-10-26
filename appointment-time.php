@@ -1,15 +1,20 @@
 <?php
+	include "connect.php";
+
 	if (empty($_GET["doctor-id"]) || empty($_GET["date"])) {
 		http_response_code(404);
 		die();
 	}
 
-	// เขียนไว้ชั่วคราว รอให้ระบบหยิบข้อมูลจาก database ได้ก่อน
 	$doctor_id = $_GET["doctor-id"];
 
-	$morning_shift = true; 		// เลือก morning_shift จาก database เข้ามาใส่ที่นี่
-	$afternoon_shift = true; 	// เลือก afternoon_shift จาก database เข้ามาใส่ที่นี่
-	// ---
+	$stmt = $pdo->prepare("SELECT morning_shift, afternoon_shift FROM `_doctor` WHERE doctor_id = ?");
+	$stmt->bindParam(1, $doctor_id);
+	$stmt->execute();
+	$row = $stmt->fetch();
+
+	$morning_shift = $row["morning_shift"]; 		// เลือก morning_shift จาก database เข้ามาใส่ที่นี่
+	$afternoon_shift = $row["afternoon_shift"]; 	// เลือก afternoon_shift จาก database เข้ามาใส่ที่นี่
 
 	class AppointmentTimeData {
 		public $time;
