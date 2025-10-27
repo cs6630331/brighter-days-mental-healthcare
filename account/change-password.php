@@ -18,7 +18,7 @@
 	<?php include "../components/header.php"; ?>
 	<main>
 		<?php include "../components/account-nav.php" ?>
-		<h1>ข้อมูลของฉัน</h1>
+		<h1>เปลี่ยนรหัสผ่าน</h1>
 		<section>
 			<?php include "../components/notice-box.php" ?>
 			<form class="account-details" action="update-password.php" method="POST">
