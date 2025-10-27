@@ -9,12 +9,9 @@ function verifyPassword(passVal, confirmVal) {
 	function showResult() {
 		if (confirmPassword.value === "")
 			result.innerText = "";
-
-		if (password.value !== confirmPassword.value && password.value !== "") {
+		else if (password.value !== confirmPassword.value && password.value !== "")
 			result.innerText = "รหัสผ่านไม่ตรงกัน";
-		}
-		else {
+		else
 			result.innerText = "";
-		}
 	}
 }
