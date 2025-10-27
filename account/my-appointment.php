@@ -20,6 +20,7 @@
 		<?php include "../components/account-nav.php" ?>
 		<h1>นัดหมายของฉัน</h1>
 		<section>
+			<?php include "../components/notice-box.php"; ?>
 			<article class="appointment">
 				<?php if ($_SESSION["user_appointment"]): ?>
 					<h2 class="text-center"><?=$_SESSION["user_appointment"]["doctor_fullname"]?></h2>

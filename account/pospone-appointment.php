@@ -12,7 +12,8 @@
 		<?php include "../components/account-nav.php" ?>
 		<h1>เลื่อนนัดหมาย</h1>
 		<section>
-			<form class="change appointment">
+			<?php include "../components/notice-box.php"; ?>
+			<form action="update-appointment.php" method="post" class="change appointment">
 				<?php
 					$iso_date_format = "Y-m-d";
 
