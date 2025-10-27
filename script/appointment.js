@@ -1,5 +1,5 @@
 function appointment() {
-	const doctorId = new URL(location.href).searchParams.get("doctor-id") || 1;
+	const doctorId = new URL(location.href).searchParams.get("id") || 1;
 
 	const appointmentDate = document.getElementById("date");
 	const dateErrMsg = document.getElementById("date-err-msg");
