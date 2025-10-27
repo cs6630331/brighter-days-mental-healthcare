@@ -41,8 +41,10 @@
 			<li>ยืนยันข้อมูล</li>
 		</ol>
 		<hr>
-		<form action="#">
-			<input type="hidden" name="id" value="<?=$GET["id"]?>">
+		<?php include "components/notice-box.php" ?>
+		<form action="add-appointment.php" method="post">
+			<input type="hidden" name="doctor_id" value="<?=$_GET["id"]?>">
+			<input type="hidden" name="doctor_fullname" value="<?=$row["doctor_fullname"]?>">
 			<div id="appointment-form">
 				<fieldset>
 					<?php
@@ -70,9 +72,9 @@
 				</fieldset>
 				<fieldset>
 					<legend>ข้อมูลผู้ป่วย</legend>
-					<label for="symptom">
+					<label for="notes">
 						สิ่งที่ต้องการปรึกษา
-						<textarea required name="symptom" id="symptom" rows="5"></textarea>
+						<textarea required name="notes" id="notes" rows="5"></textarea>
 					</label>
 				</fieldset>
 				<section>
@@ -82,7 +84,7 @@
 							<time datetime="NaN" id="time-summary"></time>
 						</p>
 						<h3>สิ่งที่ต้องการปรึกษา</h3>
-						<p id="symptom-summary"></p>
+						<p id="notes-summary"></p>
 					</article>
 				</section>
 			</div>
