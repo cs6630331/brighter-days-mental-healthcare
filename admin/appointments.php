@@ -41,45 +41,37 @@
 		<?php
 			include "../connect.php";
 
-			if (isset($_GET["q"]) && !empty($_GET["q"])) {
-				$stmt = $pdo->prepare("
-					SELECT
-					    `_appointment`.`appointment_id`,
-					    CONCAT(`_user`.`user_name`, ' ', `_user`.`user_surname`) AS patient_fullname,
-					    CONCAT(`_doctor`.`doctor_name`, ' ', `_doctor`.`doctor_surname`) AS doctor_fullname,
-					    `_appointment`.`appointment_date`,
-					    `_appointment`.`appointment_time`
-					FROM
-					    `_appointment`
-					JOIN `_doctor` ON `_doctor`.`doctor_id` = `_appointment`.`doctor_id`
-					JOIN `_user` ON `_user`.`user_id` = `_appointment`.`user_id`
-					WHERE `_appointment`.`status` = 'confirmed'
-					GROUP BY
-						`_appointment`.`appointment_id`
-					HAVING
-						patient_fullname LIKE ?;
-				");
-				$q = $_GET["q"] . "%";
+			$stmt = $pdo->prepare("
+				SELECT
+				    `_appointment`.`appointment_id`,
+				    CONCAT(
+				        `_user`.`user_name`,
+				        ' ',
+				        `_user`.`user_surname`
+				    ) AS patient_fullname,
+				    CONCAT(
+				        `_doctor`.`doctor_name`,
+				        ' ',
+				        `_doctor`.`doctor_surname`
+				    ) AS doctor_fullname,
+				    `_appointment`.`appointment_date`,
+				    `_appointment`.`appointment_time`
+				FROM
+				    `_appointment`
+				JOIN `_doctor` ON `_doctor`.`doctor_id` = `_appointment`.`doctor_id`
+				JOIN `_user` ON `_user`.`user_id` = `_appointment`.`user_id`
+				WHERE
+				    `_appointment`.`status` = 'confirmed'
+				GROUP BY
+				    `_appointment`.`appointment_id`
+				HAVING
+					patient_fullname LIKE ?
+				ORDER BY
+					`_appointment`.`appointment_date`, `_appointment`.`appointment_time` DESC;
+			");
+			$q = ($_GET["q"] ?? "") . "%";
+			$stmt->bindParam(1, $q);
 
-				$stmt->bindParam(1, $q);
-			}
-			else {
-				$stmt = $pdo->prepare("
-					SELECT
-					    `_appointment`.`appointment_id`,
-					    CONCAT(`_user`.`user_name`, ' ', `_user`.`user_surname`) AS patient_fullname,
-					    CONCAT(`_doctor`.`doctor_name`, ' ', `_doctor`.`doctor_surname`) AS doctor_fullname,
-					    `_appointment`.`appointment_date`,
-					    `_appointment`.`appointment_time`
-					FROM
-					    `_appointment`
-					JOIN `_doctor` ON `_doctor`.`doctor_id` = `_appointment`.`doctor_id`
-					JOIN `_user` ON `_user`.`user_id` = `_appointment`.`user_id`
-					WHERE `_appointment`.`status` = 'confirmed'
-					GROUP BY
-					    `_appointment`.`appointment_id`;
-				");
-			}
 			$stmt->execute();
 		?>
 		<?php while ($row = $stmt->fetch()): ?>
