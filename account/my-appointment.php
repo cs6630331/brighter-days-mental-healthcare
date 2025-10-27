@@ -13,6 +13,12 @@
 	<?php include "../components/head.php"; ?>
 	<title>My Appointment | Brighter Days Mental Healthcare</title>
 	<link rel="stylesheet" href="/style/account.css">
+	<script>
+		function confirmCancel() {
+			if (confirm("คุณแน่ใจหรือไม่ว่าจะยกเลิกการนัด?"))
+				location.href = "/account/delete-appointment.php";
+		}
+	</script>
 </head>
 <body>
 	<?php include "../components/header.php"; ?>
@@ -20,6 +26,7 @@
 		<?php include "../components/account-nav.php" ?>
 		<h1>นัดหมายของฉัน</h1>
 		<section>
+			<?php include "../components/notice-box.php"; ?>
 			<article class="appointment">
 				<?php if ($_SESSION["user_appointment"]): ?>
 					<h2 class="text-center"><?=$_SESSION["user_appointment"]["doctor_fullname"]?></h2>
@@ -46,7 +53,7 @@
 					<p><?=$_SESSION["user_appointment"]["notes"]?></p>
 					<div style="text-align: right;">
 						<a class="button" href="pospone-appointment.php">เลื่อนนัดหมาย</a>
-						<a class="button" href="cancel-appointment.php">ยกเลิกนัดหมาย</a>
+						<a class="button" href="javascript:confirmCancel()">ยกเลิกนัดหมาย</a>
 					</div>
 				<?php else: ?>
 					<h2 class="text-center">ไม่พบนัดหมาย</h2>
