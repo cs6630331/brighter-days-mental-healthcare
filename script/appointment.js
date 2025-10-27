@@ -108,9 +108,9 @@ function appointment() {
 		// ถ้าอยู่ field สุดท้าย (สรุป) ให้ update ผลสรุป
 		if (activeFieldset === 2) {
 			const timeSummary = document.getElementById("time-summary");
-			const symptomSummary = document.getElementById("symptom-summary");
+			const symptomSummary = document.getElementById("notes-summary");
 
-			const symptom = document.getElementById("symptom");
+			const notes = document.getElementById("notes");
 			const time = document.forms[0]["time"];
 
 			const days = ["อาทิตย์", "จันทร์", "อังคาร", "พุธ", "พฤหัสบดี", "ศุกร์", "เสาร์"];
@@ -134,7 +134,7 @@ function appointment() {
 				appointmentDateValue.getDate().toString().padStart(2, "0")
 			);
 			
-			symptomSummary.innerText = symptom.value ? symptom.value : "-";
+			symptomSummary.innerText = notes.value;
 		}
 	}
 

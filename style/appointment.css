@@ -63,7 +63,7 @@ main textarea {
 label[for="date"] {
 	width: fit-content;
 }
-label[for="symptom"] {
+label[for="notes"] {
 	grid-column: span 2;
 	max-width: 40rem;
 	margin: auto;
