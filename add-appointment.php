@@ -12,7 +12,7 @@ $appointment_available = $stmt->fetch();
 
 if ($appointment_available) {
 	setcookie("notice", "หมอไม่ว่างในวันเวลาที่คุณเลือก (" . $_POST["date"] . ", " . $_POST["time"] . ") กรุณาเลือกวันเวลาอื่น");
-	header("Location: /account/appointment.php?id=" . $_POST["doctor_id"]);
+	header("Location: /appointment.php?id=" . $_POST["doctor_id"]);
 	die();
 }
 
