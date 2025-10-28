@@ -48,7 +48,7 @@
 	}
 	
 	if ($afternoon_shift) {
-		$datetime->modify("+1 hour");
+		$datetime = new DateTime("13:00:00");
 
 		do {
 			array_push($data, new AppointmentTimeData($datetime));
