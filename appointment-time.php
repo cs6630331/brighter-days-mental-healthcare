@@ -51,7 +51,9 @@
 		$datetime = new DateTime("13:00:00");
 
 		do {
-			array_push($data, new AppointmentTimeData($datetime));
+			if (!in_array($datetime->format("H:i:s"), $non_available_time))
+				array_push($data, new AppointmentTimeData($datetime));
+			
 			$datetime->modify("+30 minute");
 		}
 		while ($datetime->format("H") != "16");
