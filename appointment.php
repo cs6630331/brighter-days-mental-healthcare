@@ -1,6 +1,12 @@
 <?php
 	include "init.php";
 	include "connect.php";
+
+	# redirect ไปหน้า login ถ้าผู้ใช้ยังไม่ได้ login
+	if (empty($_SESSION["user_id"])) {
+		header("Location: /login.php");
+		die();
+	}
 	
 	# redirect ไปหน้า My Appointment ถ้าผู้ใช้ลงวันนัดไว้แล้ว
 	if (!empty($_SESSION["user_appointment"])) {

@@ -2,6 +2,12 @@
 include "connect.php";
 session_start();
 
+# redirect ไปหน้า login ถ้าผู้ใช้ยังไม่ได้ login
+if (empty($_SESSION["user_id"])) {
+	header("Location: /login.php");
+	die();
+}
+
 $stmt = $pdo->prepare("SELECT * FROM `_appointment` WHERE doctor_id = ? AND appointment_date = ? AND appointment_time = ?");
 $stmt->bindParam(1, $_POST["doctor_id"]);
 $stmt->bindParam(2, $_POST["date"]);
