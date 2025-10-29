@@ -43,7 +43,7 @@ input[type="radio"]:checked ~ label {
 }
 
 label[for="date"] {
-	width: fit-content;
+	width: 16rem;
 }
 label[for="current-password"] {
 	grid-column: span 2;
@@ -126,6 +126,7 @@ label[for="current-password"] {
 	inset: 0;
 }
 
+#date-err-msg,
 #password-result {
 	color: red;
 }

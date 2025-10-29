@@ -1,10 +1,20 @@
 function posponeAppointment(doctorId) {
 	const appointmentDate = document.getElementById("date");
 	const timeSelector = document.getElementById("time-selector");
+    const dateErrMsg = document.getElementById("date-err-msg");
 
-	appointmentDate.addEventListener("change", createTimeSelectors);
+    appointmentDate.addEventListener("change", createTimeSelectors);
 
-	function createTimeSelectors() {
+    function createTimeSelectors() {
+        if (!appointmentDate.checkValidity()) {
+            dateErrMsg.hidden = false;
+            timeSelector.innerHTML = null;
+            return;
+        }
+        else {
+            dateErrMsg.hidden = true;
+        }
+
 		const xhr = new XMLHttpRequest();
 		xhr.responseType = "json";
 		

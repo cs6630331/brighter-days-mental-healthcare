@@ -33,6 +33,7 @@
 						max="<?=date_format($next14days, $iso_date_format)?>"
 					>
 				</label>
+				<p hidden id="date-err-msg" class="text-center">คุณสามารถนัดล่วงหน้าได้แค่ 1-14 วันเท่านั้น ไม่สามารถนัดวันนี้ วันก่อนหน้า หรือวันที่เลย 14 วันไปแล้วได้</p>
 				<div id="time-selector"></div>
 				<button type="submit" class="big margin-center">เลื่อน</button>
 			</form>
