@@ -7,12 +7,12 @@ function posponeAppointment(doctorId) {
 
     function createTimeSelectors() {
         if (!appointmentDate.checkValidity()) {
-            dateErrMsg.hidden = false;
+            dateErrMsg.style.display = "block";
             timeSelector.innerHTML = null;
             return;
         }
         else {
-            dateErrMsg.hidden = true;
+            dateErrMsg.style.display = "none";
         }
 
 		const xhr = new XMLHttpRequest();

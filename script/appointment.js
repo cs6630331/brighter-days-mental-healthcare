@@ -157,11 +157,11 @@ function appointment() {
 		timeSelector.innerHTML = null;
 
 		if (appointmentDate.checkValidity()) {
-			dateErrMsg.innerText = null;
+			dateErrMsg.style.display = "none";
 			createTimeSelectors();
 		}
 		else {
-			dateErrMsg.innerText = "คุณสามารถนัดล่วงหน้าได้แค่ 1-14 วันเท่านั้น ไม่สามารถนัดวันนี้ วันก่อนหน้า หรือวันที่เลย 14 วันไปแล้วได้";
+			dateErrMsg.style.display = "block";
 		}
 	}
 
