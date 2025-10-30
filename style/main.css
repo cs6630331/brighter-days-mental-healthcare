@@ -286,7 +286,7 @@ label[for="menu-button"] {
 		
 		display: none;
 	}
-	#site-nav input:checked ~ label {
+	#site-nav input:checked + label {
 		background: #043133;
 		color: #ffffff;
 	}

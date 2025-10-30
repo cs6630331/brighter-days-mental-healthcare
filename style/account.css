@@ -28,7 +28,7 @@ input[type="radio"] {
 	opacity: 0;
 }
 
-input[type="radio"] ~ label {
+input[type="radio"] + label {
 	padding: 0.5rem;
 	border-radius: 0.5rem;
 	text-align: center;
@@ -38,7 +38,7 @@ input[type="radio"] ~ label {
 
 	user-select: none;
 }
-input[type="radio"]:checked ~ label {
+input[type="radio"]:checked + label {
 	background: #D0E7FF;
 }
 
