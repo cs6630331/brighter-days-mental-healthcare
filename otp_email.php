@@ -11,13 +11,13 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="logo">
+    <main class="container">
+        <header class="logo">
             <h1>🌟 Brighter Days</h1>
             <p>Mental Healthcare</p>
-        </div>
+        </header>
 
-        <div class="form-section">
+        <section class="form-section">
             <h2>ลงทะเบียน</h2>
 
             <div class="error-message" id="errorMessage"></div>
@@ -36,12 +36,12 @@
 
                 <button type="submit">ส่ง OTP</button>
             </form>
-        </div>
+        </section>
 
-        <div class="footer-text">
+        <footer class="footer-text">
             มีบัญชีอยู่แล้ว? <a href="login.php">เข้าสู่ระบบ</a>
-        </div>
-    </div>
+        </footer>
+    </main>
 
     <script>
         document.getElementById('emailForm').addEventListener('submit', function(e) {

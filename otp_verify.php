@@ -49,13 +49,13 @@ unset($_SESSION['otp_error']);
     <link rel="stylesheet" href="style/otp_verify.css">
 </head>
 <body>
-    <div class="container">
-        <div class="logo">
+    <main class="container">
+        <header class="logo">
             <h1>🌟 Brighter Days</h1>
             <p>Mental Healthcare</p>
-        </div>
+        </header>
 
-        <div class="form-section">
+        <section class="form-section">
             <div class="success-icon">📧</div>
             <h2>ยืนยันรหัส OTP</h2>
             <div class="email-display">กรอก OTP ที่ได้รับจาก<br><?php echo htmlspecialchars($email); ?></div>
@@ -89,12 +89,12 @@ unset($_SESSION['otp_error']);
             <div class="resend">
                 <p>ไม่ได้รับรหัส? <a href="otp_email.php">ขอรหัสใหม่</a></p>
             </div>
-        </div>
+        </section>
 
-        <div class="footer-text">
+        <footer class="footer-text">
             มีบัญชีอยู่แล้ว? <a href="login.php">เข้าสู่ระบบ</a>
-        </div>
-    </div>
+        </footer>
+    </main>
 
     <script>
         // OTP input format (เว้นวรรค)

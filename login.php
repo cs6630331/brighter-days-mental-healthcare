@@ -109,62 +109,64 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {   //เช็คว่ากดย�
     <link rel="stylesheet" href="style/login.css">
 </head>
 <body>
-    <div class="container">
+    <main class="container">
         <a href="/" class="back-btn">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
             </svg>
         </a>
-        <div class="logo">
+        <header class="logo">
             <h1>🌟 Brighter Days</h1>
             <p>Mental Healthcare</p>
-        </div>
+        </header>
 
-        <div class="login-icon">🔐</div>
-        <h2>เข้าสู่ระบบ</h2>
+        <section>
+            <div class="login-icon">🔐</div>
+            <h2>เข้าสู่ระบบ</h2>
 
-        <?php if (!empty($error)): ?>
-            <div class="error-message"><?php echo htmlspecialchars($error); ?></div>
-        <?php endif; ?>
+            <?php if (!empty($error)): ?>
+                <div class="error-message"><?php echo htmlspecialchars($error); ?></div>
+            <?php endif; ?>
 
-        <form method="POST" id="loginForm">
-            <div class="form-group">
-                <label for="email">อีเมล</label>
-                <input 
-                    type="email" 
-                    name="email" 
-                    id="email" 
-                    placeholder="example@gmail.com"
-                    required
-                    value="<?php echo htmlspecialchars($email); ?>"
-                    autofocus
-                >
-            </div>
+            <form method="POST" id="loginForm">
+                <div class="form-group">
+                    <label for="email">อีเมล</label>
+                    <input 
+                        type="email" 
+                        name="email" 
+                        id="email" 
+                        placeholder="example@gmail.com"
+                        required
+                        value="<?php echo htmlspecialchars($email); ?>"
+                        autofocus
+                    >
+                </div>
 
-            <div class="form-group">
-                <label for="password">รหัสผ่าน</label>
-                <input 
-                    type="password" 
-                    name="password" 
-                    id="password" 
-                    placeholder="••••••••"
-                    required
-                >
-            </div>
+                <div class="form-group">
+                    <label for="password">รหัสผ่าน</label>
+                    <input 
+                        type="password" 
+                        name="password" 
+                        id="password" 
+                        placeholder="••••••••"
+                        required
+                    >
+                </div>
 
-            <div class="forgot-password">
-                <a href="#">ลืมรหัสผ่าน?</a>
-            </div>
+                <div class="forgot-password">
+                    <a href="#">ลืมรหัสผ่าน?</a>
+                </div>
 
-            <button type="submit">ยืนยัน</button>
-        </form>
+                <button type="submit">ยืนยัน</button>
+            </form>
+        </section>
 
-        <div class="footer-links">
+        <footer class="footer-links">
             <div class="footer-text">
                 ยังไม่มีบัญชี? <a href="otp_email.php">สมัครสมาชิก</a>
             </div>
-        </div>
-    </div>
+        </footer>
+    </main>
 
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(e) {

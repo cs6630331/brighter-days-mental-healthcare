@@ -100,113 +100,114 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="style/registering.css">
 </head>
 <body>
-    <div class="container">
-        <div class="logo">
+    <main class="container">
+        <header class="logo">
             <h1>🌟 Brighter Days</h1>
             <p>Mental Healthcare</p>
-        </div>
-
-        <h2>กรอกข้อมูลส่วนตัว</h2>
-
-        <?php if (!empty($error)): ?>
-            <div class="error-message"><?php echo htmlspecialchars($error); ?></div>
-        <?php endif; ?>
-
-        <?php if (!empty($success)): ?>
-            <div class="success-message"><?php echo htmlspecialchars($success); ?></div>
-        <?php endif; ?>
-
-        <div class="email-display">
-            ✓ อีเมล: <?php echo htmlspecialchars($verified_email); ?>
-        </div>
-
-        <form method="POST" id="registerForm">
-            <input type="hidden" name="email" value="<?php echo htmlspecialchars($verified_email); ?>">
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="name">ชื่อ *</label>
-                    <input 
-                        type="text" 
-                        name="name" 
-                        id="name" 
-                        required
-                        value="<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name']) : ''; ?>"
-                    >
-                </div>
-                <div class="form-group">
-                    <label for="surname">นามสกุล *</label>
-                    <input 
-                        type="text" 
-                        name="surname" 
-                        id="surname" 
-                        required
-                        value="<?php echo isset($_POST['surname']) ? htmlspecialchars($_POST['surname']) : ''; ?>"
-                    >
-                </div>
+        </header>
+        <section>
+            <h2>กรอกข้อมูลส่วนตัว</h2>
+    
+            <?php if (!empty($error)): ?>
+                <div class="error-message"><?php echo htmlspecialchars($error); ?></div>
+            <?php endif; ?>
+    
+            <?php if (!empty($success)): ?>
+                <div class="success-message"><?php echo htmlspecialchars($success); ?></div>
+            <?php endif; ?>
+    
+            <div class="email-display">
+                ✓ อีเมล: <?php echo htmlspecialchars($verified_email); ?>
             </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="phone-number">เบอร์โทรศัพท์ *</label>
-                    <input 
-                        type="tel" 
-                        name="phone-number" 
-                        id="phone-number" 
-                        pattern="[0-9]{10}"
-                        placeholder="0xxxxxxxxx"
-                        required
-                        value="<?php echo isset($_POST['phone-number']) ? htmlspecialchars($_POST['phone-number']) : ''; ?>"
-                    >
+    
+            <form method="POST" id="registerForm">
+                <input type="hidden" name="email" value="<?php echo htmlspecialchars($verified_email); ?>">
+    
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">ชื่อ *</label>
+                        <input
+                            type="text"
+                            name="name"
+                            id="name"
+                            required
+                            value="<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name']) : ''; ?>"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="surname">นามสกุล *</label>
+                        <input
+                            type="text"
+                            name="surname"
+                            id="surname"
+                            required
+                            value="<?php echo isset($_POST['surname']) ? htmlspecialchars($_POST['surname']) : ''; ?>"
+                        >
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="thai-id">รหัสบัตรประชาชน *</label>
-                    <input 
-                        type="text" 
-                        name="thai-id" 
-                        id="thai-id" 
-                        pattern="[0-9]{13}"
-                        placeholder="0000000000000"
-                        maxlength="13"
-                        required
-                        value="<?php echo isset($_POST['thai-id']) ? htmlspecialchars($_POST['thai-id']) : ''; ?>"
-                    >
+    
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone-number">เบอร์โทรศัพท์ *</label>
+                        <input
+                            type="tel"
+                            name="phone-number"
+                            id="phone-number"
+                            pattern="[0-9]{10}"
+                            placeholder="0xxxxxxxxx"
+                            required
+                            value="<?php echo isset($_POST['phone-number']) ? htmlspecialchars($_POST['phone-number']) : ''; ?>"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="thai-id">รหัสบัตรประชาชน *</label>
+                        <input
+                            type="text"
+                            name="thai-id"
+                            id="thai-id"
+                            pattern="[0-9]{13}"
+                            placeholder="0000000000000"
+                            maxlength="13"
+                            required
+                            value="<?php echo isset($_POST['thai-id']) ? htmlspecialchars($_POST['thai-id']) : ''; ?>"
+                        >
+                    </div>
                 </div>
-            </div>
-
-            <div class="form-row full">
-                <div class="form-group">
-                    <label for="password">รหัสผ่าน *</label>
-                    <input 
-                        type="password" 
-                        name="password" 
-                        id="password" 
-                        placeholder="อย่างน้อย 6 ตัวอักษร"
-                        required
-                    >
+    
+                <div class="form-row full">
+                    <div class="form-group">
+                        <label for="password">รหัสผ่าน *</label>
+                        <input
+                            type="password"
+                            name="password"
+                            id="password"
+                            placeholder="อย่างน้อย 6 ตัวอักษร"
+                            required
+                        >
+                    </div>
                 </div>
-            </div>
-
-            <div class="form-row full">
-                <div class="form-group">
-                    <label for="confirm-password">ยืนยันรหัสผ่าน *</label>
-                    <input 
-                        type="password" 
-                        name="confirm-password" 
-                        id="confirm-password" 
-                        placeholder="กรอกรหัสผ่านอีกครั้ง"
-                        required
-                    >
+    
+                <div class="form-row full">
+                    <div class="form-group">
+                        <label for="confirm-password">ยืนยันรหัสผ่าน *</label>
+                        <input
+                            type="password"
+                            name="confirm-password"
+                            id="confirm-password"
+                            placeholder="กรอกรหัสผ่านอีกครั้ง"
+                            required
+                        >
+                    </div>
                 </div>
-            </div>
+    
+                <button type="submit">สมัครสมาชิก</button>
+            </form>
+        </section>
 
-            <button type="submit">สมัครสมาชิก</button>
-        </form>
-
-        <div class="footer-text">
+        <footer class="footer-text">
             มีบัญชีอยู่แล้ว? <a href="login.php">เข้าสู่ระบบ</a>
-        </div>
-    </div>
+        </footer>
+    </main>
 
     <script>
         // ตรวจสอบเบอร์โทร

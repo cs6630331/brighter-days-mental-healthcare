@@ -173,12 +173,12 @@ function getEmailHTML($otp) {
         </style>
     </head>
     <body>
-        <div class='email-container'>
-            <div class='header'>
+        <main class='email-container'>
+            <header class='header'>
                 <h1>🌟 Brighter Days</h1>
                 <p>Mental Healthcare</p>
-            </div>
-            <div class='content'>
+            </header>
+            <article class='content'>
                 <h2>ยืนยันการสมัครสมาชิก</h2>
                 <p>สวัสดีค่ะ/ครับ</p>
                 <p>ขอบคุณที่สมัครสมาชิก Brighter Days Mental Healthcare</p>
@@ -193,12 +193,12 @@ function getEmailHTML($otp) {
                 
                 <p><strong>⚠️ สำคัญ:</strong></p>
                 <p>หากคุณไม่ได้ขอการสมัครสมาชิก โปรดข้ามอีเมลนี้และติดต่อฝ่ายสนับสนุนของเรา</p>
-            </div>
-            <div class='footer'>
+            </article>
+            <footer class='footer'>
                 <p>© 2025 Brighter Days Mental Healthcare. ทุกสิทธิ์สงวน</p>
                 <p>หากมีปัญหาใด ๆ โปรดติดต่อเรา support@brighterdays.com</p>
-            </div>
-        </div>
+            </footer>
+        </main>
     </body>
     </html>
     ";
