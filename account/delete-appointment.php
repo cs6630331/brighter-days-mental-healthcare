@@ -2,6 +2,11 @@
 include "../connect.php";
 session_start();
 
+if (!isset($_SESSION["user_id"])) {
+	header("Location: /login.php");
+	die();
+}
+
 $stmt = $pdo->prepare("DELETE FROM `_appointment` WHERE appointment_id = ?");
 $stmt->bindParam(1, $_SESSION["user_appointment"]["id"]);
 
