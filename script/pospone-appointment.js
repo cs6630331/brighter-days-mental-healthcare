@@ -16,13 +16,12 @@ function posponeAppointment(doctorId) {
         }
 
 		const xhr = new XMLHttpRequest();
-		xhr.responseType = "json";
 		
 		xhr.addEventListener("load", function(event) {
 			isFetchingDate = false;
 			timeSelector.innerHTML = null;
 
-			const response = event.target.response;
+			const response = JSON.parse(xhr.responseText);
 
 			for (const data of response) {
 				const div = document.createElement("div");
