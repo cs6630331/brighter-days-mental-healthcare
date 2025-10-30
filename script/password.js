@@ -8,10 +8,10 @@ function verifyPassword(passVal, confirmVal) {
 
 	function showResult() {
 		if (confirmPassword.value === "")
-			result.innerText = "";
+			result.style.display = "none";
 		else if (password.value !== confirmPassword.value && password.value !== "")
-			result.innerText = "รหัสผ่านไม่ตรงกัน";
+			result.style.block = "block";
 		else
-			result.innerText = "";
+			result.style.display = "none";
 	}
 }
