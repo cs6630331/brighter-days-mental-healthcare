@@ -17,3 +17,6 @@ composer install
 ```
 php -S localhost:8080
 ```
+
+## รันใน Host 193
+ก่อนที่จะรัน host 193 จะต้องเปลี่ยนลิงก์ `href` และ `Location: ` ให้เริ่มต้นด้วย `https://202.44.40.193/~cs6630331/brighter-days-mental-healthcare/` แทนที่ `/` เรียบร้อยก่อน
