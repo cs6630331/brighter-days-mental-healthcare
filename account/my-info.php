@@ -32,11 +32,11 @@
 				</label>
 				<label for="phone-number">
 					เบอร์โทรติดต่อ
-					<input required type="text" name="phone-number" id="phone-number" value="0996584474" pattern="0\d{9}" title="เบอร์โทรต้องขึ้นต้นด้วยเลข 0 ตามด้วยเลข 9 หลัก">
+					<input required type="text" name="phone-number" id="phone-number" value="<?=$_SESSION["user_detail"]["phone_number"]?>" pattern="0\d{9}" title="เบอร์โทรต้องขึ้นต้นด้วยเลข 0 ตามด้วยเลข 9 หลัก">
 				</label>
 				<label for="thai-id">
 					รหัสบัตรประชาชน
-					<input required type="text" name="thai-id" id="thai-id" pattern="\d{13}" value="1209011111110" title="รหัสบัตรประชาชนต้องประกอบด้วยเลข 13 หลัก">
+					<input required type="text" name="thai-id" id="thai-id" pattern="\d{13}" value="<?=$_SESSION["user_detail"]["citizen_id"]?>" title="รหัสบัตรประชาชนต้องประกอบด้วยเลข 13 หลัก">
 				</label>
 				<div class="separated">
 					<button type="submit" class="big">ยืนยัน</button>
